@@ -341,9 +341,6 @@ let g:Illuminate_delay = 1500
 " vim-search-pulse
 " let g:vim_search_pulse_duration = 250
 
-" poppy
-au! cursormoved * call PoppyInit()
-
 " notational-fzf-vim
 if !empty(glob("~/notes"))
 	let g:nv_search_paths = ['~/notes']
@@ -469,6 +466,62 @@ map <leader>n :NERDTreeToggle<CR>
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" Open hotkeys
+map <C-p> :Files<CR>
+nmap <leader>; :Buffers<CR>
+
+" Quick-save
+nmap <leader>w :w<CR>
+
+" Very magic by default
+nnoremap ? ?\v
+nnoremap / /\v
+cnoremap %s/ %sm/
+
+
+" =============================================================================
+" # Keyboard shortcuts
+" =============================================================================
+" ; as :
+nnoremap ; :
+
+" Ctrl+j and Ctrl+k as Esc
+" Ctrl-j is a little awkward unfortunately:
+" https://github.com/neovim/neovim/issues/5916
+" So we also map Ctrl+k
+nnoremap <C-j> <Esc>
+inoremap <C-j> <Esc>
+vnoremap <C-j> <Esc>
+snoremap <C-j> <Esc>
+xnoremap <C-j> <Esc>
+cnoremap <C-j> <C-c>
+onoremap <C-j> <Esc>
+lnoremap <C-j> <Esc>
+tnoremap <C-j> <Esc>
+
+nnoremap <C-k> <Esc>
+inoremap <C-k> <Esc>
+vnoremap <C-k> <Esc>
+snoremap <C-k> <Esc>
+xnoremap <C-k> <Esc>
+cnoremap <C-k> <C-c>
+onoremap <C-k> <Esc>
+lnoremap <C-k> <Esc>
+tnoremap <C-k> <Esc>
+
+" Ctrl+h to stop searching
+vnoremap <C-h> :nohlsearch<cr>
+nnoremap <C-h> :nohlsearch<cr>
+
+" Suspend with Ctrl+f
+inoremap <C-f> :sus<cr>
+vnoremap <C-f> :sus<cr>
+nnoremap <C-f> :sus<cr>
+
+" Jump to start and end of line using the home row keys
+map H ^
+map L $
 
 " find merge conflict markers
 nmap <silent> <leader>fc <ESC>/\v^[<=>]{7}( .*\|$)<CR>

@@ -1,103 +1,120 @@
-set shell=/bin/bash
-let mapleader = "\<Space>"
-let maplocalleader = ","
+" Plug related config
 
-" ===========================================================================
-"  PLUGINS
-" ===========================================================================
-set nocompatible
-filetype off
-set rtp+=~/dev/others/base16/vim/
-call plug#begin('$HOME/.local/share/nvim/plugged')
+call plug#begin()
 
-"█▓▒░ Load plugins
-
-"█▓▒░ VIM enhancements
-" --------------------
 Plug 'ciaranm/securemodelines'
-" Plug 'editorconfig/editorconfig-vim'		" Assume an editor config is enforced
-Plug 'tpope/vim-fugitive'
-" Plug 'sheerun/vim-polyglot'			" I don't need this and it is buggy
-Plug 'scrooloose/nerdcommenter'
-" Plug 'justinmk/vim-sneak'			" Need to remember its syntax
-Plug 'junegunn/vim-easy-align', {'for': ['tex', 'latex']}  " Make writing easy with align
-" Plug 'tweekmonster/startuptime.vim'
-" Plug 'tricktux/pomodoro.vim'
 
-"█▓▒░ GUI enhancements
-" --------------------
-Plug 'machakann/vim-highlightedyank'		" highlight yank
-Plug 'Yggdroot/indentLine'
-Plug 'jaxbot/semantic-highlight.vim'		" different color for every variable
-Plug 'bounceme/poppy.vim'			" rainbow parens
-Plug 'ntpeters/vim-better-whitespace'
-" Plug 'romainl/vim-cool'				" disables search highlighting when you are done
-" Plug 'RRethy/vim-illuminate'			" highlighting other uses of the current word
-" Plug 'vim-airline/vim-airline'			" better status line
-" Plug 'vim-airline/vim-airline-themes'
-Plug 'itchyny/lightline.vim'
-" Plug 'lilydjwg/colorizer'			" colorize text in the form
-" Plug 'mbbill/undotree'
-Plug 'rhysd/committia.vim'			" better git commit layout
-" Plug 'andymass/vim-matchup', { 'for': ['tex', 'latex'] }
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-" Plug 'godlygeek/tabular', { 'for': ['tex', 'latex'] }
-Plug 'ryanoasis/vim-devicons'
+" Status bar
+Plug 'bling/vim-airline'
 
-"█▓▒░ Additional func..
-" ----------------
-Plug 'tpope/vim-dispatch'
-
-"█▓▒░ Fuzzy finder
-" ----------------
-Plug 'airblade/vim-rooter'
+" Fuzzy search
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-"█▓▒░ Semantic language support
-" -----------------------------
-" Coc for completion
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'jiangmiao/auto-pairs' | Plug 'dense-analysis/ale'			" and ALE for linting
-Plug 'Shougo/echodoc.vim'			" Showing function signature and inline doc.
+" ALterantive to FzF
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/telescope.nvim'
 
-"█▓▒░ VIM editing enhancements
-" ----------------------------
-Plug 'inside/vim-search-pulse'
+" Themes :3
+Plug 'morhetz/gruvbox'
+Plug 'patstockwell/vim-monokai-tasty'
+Plug 'srcery-colors/srcery-vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'NLKNguyen/papercolor-theme'
 
-"█▓▒░ Syntactic language support
-" ------------------------------
-Plug 'stephpy/vim-yaml', { 'for': 'yaml' }
-Plug 'cespare/vim-toml', { 'for': 'toml' }
-Plug 'dag/vim-fish', { 'for': 'fish' }
-Plug 'jceb/vim-orgmode'
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-Plug 'mzlogin/vim-markdown-toc'
-Plug 'alvan/vim-closetag'
+" Tree/directory explorer
+Plug 'preservim/nerdtree' 
 
-"█▓▒░ Rust
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'arzg/vim-rust-syntax-ext', { 'for': 'rust' } " broken?
+" Autopairs
+Plug 'jiangmiao/auto-pairs'
 
-"█▓▒░ C++ and Clang
-" Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['cpp'] }
-" Plug 'drmikehenry/vim-headerguard', {'for': ['cpp', 'hpp'] }
-" Plug 'bfrg/vim-cpp-modern', {'for': ['cpp', 'hpp'] }
-" Plug 'arakashic/chromatica.nvim', {'for': ['cpp', 'hpp'] }
-" Plug 'rhysd/vim-clang-format', {'for': ['c', 'cpp', 'hpp'] }
+" Coc
+" For the moment I will try to configure native Neovim LSP
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'josa42/coc-go', {'do': 'yarn install --frozen-lockfile', 'branch': 'master'}
 
-"█▓▒░ LaTeX
-" https://www.reddit.com/r/neovim/comments/idthcb/vimtex_vs_texlab/
-" Plug 'lervag/vimtex', { 'for': ['tex', 'latex'] }
-Plug 'rhysd/vim-grammarous', { 'for': ['tex', 'latex', 'markdown'] }
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
-Plug 'colepeters/spacemacs-theme.vim'
+" Track coding time
+Plug 'wakatime/vim-wakatime'
 
-if !isdirectory(expand("$HOME/dev/others/base16"))
-	Plug 'chriskempson/base16-vim'
-endif
+" Markdown live preview via browser
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
+" Editorconfig auto detect
+" Plug 'editorconfig/editorconfig-vim'
+
+" Comment stuff
+Plug 'tpope/vim-commentary' 
+
+" Distraction free editing
+Plug 'junegunn/goyo.vim'
+
+" Auto configure indentation
+Plug 'tpope/vim-sleuth'
+
+" LaTeX
+Plug 'lervag/vimtex'
+
+" Multicursor
+" Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
+" Notes related
+" Plug 'xolox/vim-misc'
+" Plug 'xolox/vim-notes'
+
+" Debugging
+Plug 'puremourning/vimspector'
+
+" Neovim built in LSP
+Plug 'neovim/nvim-lspconfig'
+Plug 'tjdevries/lsp_extensions.nvim'
+
+" Custom language related plugins
+Plug 'tjdevries/nlua.nvim'          " Lua development
+Plug 'nvim-lua/lsp-status.nvim'     " Lua statusline
+Plug 'euclidianAce/BetterLua.vim'   " Better lua
+Plug 'nvim-lua/completion-nvim'     " Better LSP completition
+
+Plug 'ziglang/zig.vim'              " Zig language support
+
+" C lang based formatting
+" By default it uses the Google style, if not .clang-format
+" file was given
+Plug 'rhysd/vim-clang-format'
+
+" Language check
+Plug 'dpelle/vim-LanguageTool'
+
+" Because why not
+Plug 'ThePrimeagen/vim-apm'
+
+" Wiki :3
+Plug 'vimwiki/vimwiki'
+
+" SageMath
+Plug 'petRUShka/vim-sage'
+
+" Js
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'eslint/eslint'
+
+" Python
+Plug 'fisadev/vim-isort'
+
+" Elixir
+Plug 'elixir-lang/vim-elixir'
+
+" Prisma
+Plug 'pantharshit00/vim-prisma'
+
 call plug#end()
-
 
 "█▓▒░ Make pyenv and neovim work nice together
 
@@ -118,44 +135,6 @@ endif
 " Don't confirm .lvimrc
 let g:localvimrc_ask = 0
 
-" ===========================================================================
-"   Editor settings
-" ===========================================================================
-filetype plugin indent on                   " required
-set autoindent
-set encoding=utf-8                          " Set default encoding to UTF-8
-set noshowmode                              " We show the mode with airline or lightline
-set hidden                                  " Hides buffers instead of closing them
-set nowrap                                  " do not wrap long lines by default
-set nojoinspaces                            " Prevents inserting two spaces after punctuation on a join (J)
-" I only use VIM from the terminals
-if (match($TERM, "-256color") != -1) && (match($TERM, "screen-256color") != -1)
-	set termguicolors                         " screen does not (yet) support truecolor
-endif
-if (match($TERM, "-256color") != -1) && (match($TERM, "tmux-256color") != -1)
-	set termguicolors                         " screen does not (yet) support truecolor
-endif
-if (match($TERM, "xterm") != -1)
-	set termguicolors                         " for the vagrant linux box
-endif
-
-set printfont=:h14
-set printencoding=utf-8
-set printoptions=paper:letter
-
-" Always draw sign column. Prevent buffer moving when adding/deleting sign.
-set signcolumn=yes
-
-" Time out on key codes but not mappings.
-" Basically this makes terminal Vim work sanely.
-set notimeout
-set ttimeout
-set ttimeoutlen=10
-set timeoutlen=300 " http://stackoverflow.com/questions/2158516/delay-before-o-opens-a-new-line
-
-" Settings needed for .lvimrc
-set exrc
-set secure
 
 set noswapfile                              " Don't use swapfile
 
@@ -188,29 +167,6 @@ set wildignore+=go/bin                           " Go bin files
 set wildignore+=go/bin-vagrant                   " Go bin-vagrant files
 set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.orig                           " Merge resolution files
-
-"Some tips from http://stevelosh.com/blog/2010/09/coming-home-to-vim/
-
-" Use wide tabs
-" set shiftwidth=4                            " 1 tab == 8 spaces
-" set softtabstop=4                           " when hitting <BS>, pretend like a tab is removed, even if spaces
-" set tabstop=4                               " a tab is eight spaces
-" set noexpandtab                             " Don't use spaces instead of tabs
-" set expandtab                               " Use spaces instead of tabs
-" set smarttab                                " Be smart when using tabs ;)
-" set shiftwidth=4                            " 1 tab == 4 spaces
-" set tabstop=2                               " a tab is four spaces
-" set softtabstop=2                           " when hitting <BS>, pretend like a tab is removed, even if spaces
-
-" Get syntax
-syntax on
-
-" Wrapping options
-set formatoptions=tc                        " wrap text and comments using textwidth
-set formatoptions+=r                        " continue comments when pressing ENTER in I mode
-set formatoptions+=q                        " enable formatting of comments with gq
-set formatoptions+=n                        " detect lists for formatting
-set formatoptions+=b                        " auto-wrap in insert mode, and do not wrap old long lines
 
 " Proper search
 set incsearch                               " Shows the match while typing
@@ -253,51 +209,246 @@ set shortmess+=c                            " don't give |ins-completion-menu| m
 " Verbose: set listchars=nbsp:¬,eol:¶,extends:»,precedes:«,trail:•
 set listchars=nbsp:¬,extends:»,precedes:«,trail:•
 
-let g:sneak#s_next = 1
+" LSP related
+lua require('init')
 
-" better whitespace
-" red #FF0000, coral #FF7F50, tomato #FF6347, orangered #FF4500, orange
-" #FFA500, darkorange #FF8C00
-"let g:better_whitespace_ctermcolor='<desired_color>'
-let g:better_whitespace_guicolor='#FF4500'
-let g:better_whitespace_enabled=1
-let g:strip_whitespace_on_save=0
+let g:use_nvim_lsp = 1
 
+if g:use_nvim_lsp
+    setlocal omnifunc=v:lua.vim.lsp.omnifunc
+
+    nnoremap <silent> gd            <cmd>lua vim.lsp.buf.definition()<CR>
+    nnoremap <silent> gD            <cmd>lua vim.lsp.buf.implementation()<CR>
+    nnoremap <silent> gdd           <cmd>lua vim.lsp.buf.declaration()<CR>
+    nnoremap <silent> K             <cmd>lua vim.lsp.buf.hover()<CR>
+    nnoremap <silent> <c-k>         <cmd>lua vim.lsp.buf.signature_help()<CR>
+    nnoremap <silent> 1gD           <cmd>lua vim.lsp.buf.type_definition()<CR>
+    nnoremap <silent> gr            <cmd>lua vim.lsp.buf.references()<CR>
+    nnoremap <silent> gR            <cmd>lua vim.lsp.buf.rename()<CR>
+    nnoremap <silent> g0            <cmd>lua vim.lsp.buf.document_symbol()<CR>
+    nnoremap <silent> gW            <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+    nnoremap <silent> <Leader>[     <cmd>lua vim.lsp.strutures.Diagnostics.buf_move_next_diagnostic()<CR>
+    nnoremap <silent> <Leader>]     <cmd>lua vim.lsp.strutures.Diagnostics.buf_move_prev_diagnostic()<CR>
+
+    augroup NvimLSP
+        autocmd!
+        autocmd BufWritePre *.py,*.rs,*.ex lua vim.lsp.buf.formatting_sync(nil, 2000)
+        autocmd BufEnter,BufWritePost *.rs lua require('lsp_extensions.inlay_hints').request { aligned = true, prefix = " » " }
+    augroup END
+
+    " Custom LSP diagnostics signs
+    " sign define LspDiagnosticsErrorSign text=E linehl=ErrorMsg texthl=LspDiagnosticsError numhl=
+    " sign define LspDiagnosticsWarningSign text=W linehl=MoreMsg texthl=LspDiagnosticsWarningSign numhl=
+end
+
+" Golang related
+" Autoformat
+autocmd BufWritePre *.go lua goimports(2000)
+" Jump to Test files
+autocmd FileType go nnoremap <silent> gts <cmd>lua go_switch()<CR>
+
+" Ziglang related
+" Autoformatting
+let g:zig_fmt_autosave = 1
+
+" Python related
+
+" C/C++ related
+" Enable Clang auto fromatting on C based languages
+autocmd FileType c,cpp,objc ClangFormatAutoEnable
+
+" Javascript formatting
+" autocmd BufWritePre *.js :normal mpgg=G`p
+
+" General configuration
+" ---------------------
+
+" Map Leader to Space
+let mapleader = "\<Space>"
+let maplocalleader = ","
+
+set nocompatible
+syntax on
+
+set t_Co=256
+
+if (has("termguicolors"))
+    set termguicolors
+endif
+
+" Am I a joke to you?
 set background=dark
-hi Comment cterm=italic gui=italic
-" extra setup that I might not need?
-" hi Normal ctermbg=NONE
-" hi Normal guibg=NONE
 
-" Colors: Spacemacs
-" colorscheme spacemacs-theme
+" Theme :3
+colorscheme gruvbox
+" colorscheme nord
+" colorscheme srcery
+" colorscheme vim-monokai-tasty
 
-" Colors: Base16
-let base16colorspace=256
-let g:base16_shell_path="$HOME/dev/others/base16/shell/scripts/"
-" colorscheme base16-atelier-dune
-colorscheme base16-gruvbox-dark-hard
-call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
-call Base16hi("CocHintSign", g:base16_gui03, "", g:base16_cterm03, "", "", "")
+" Solarized config
+let g:solarized_termcolors=256
+" colorscheme solarized
 
-" the configuration options should be placed before `colorscheme forest-night`
-" let g:forest_night_enable_italic = 1
-" let g:forest_night_disable_italic_comment = 1
-" colorscheme forest-night
+" Airline theme
+let g:airline_theme = 'gruvbox'
+
+" Disable startup message
+set shortmess+=I
+
+" Number configurations
+set relativenumber
+set number	
+
+" Line break config
+set textwidth=0
+
+" Status line config
+set laststatus=2
+
+" Search config
+set showmatch	
+set hlsearch	
+set smartcase	
+set ignorecase	
+set incsearch	
+
+set cursorline
+set ruler	
+set undolevels=1000
+set backspace=indent,eol,start
+set noerrorbells visualbell t_vb=
+set belloff=all
+
+" mouse support
+set mouse+=a
+
+set noshowmode
+
+set cmdheight=1
+set showmatch  
+set hidden     
+
+set completeopt-=preview
+
+set noequalalways
+set splitright
+set splitbelow
+set updatetime=1000
+
+set hlsearch
+
+" Make it so there are always ten lines below my cursor
+set scrolloff=10 
+
+" Tabs
+" Want auto indents automatically
+set autoindent
+set cindent
+set wrap
+
+" Make it so that long lines wrap smartly
+set breakindent
+let &showbreak=repeat(' ', 3)
+set linebreak
+
+" Always use spaces instead of tab characters
+set expandtab
+
+" Folding
+set foldmethod=marker
+set foldlevel=0
+set modelines=1
+
+" Set the gutter padding
+" so it doesnt blink when errors
+" or git gutters
+set signcolumn=yes
+
+" Clipboard
+" Always have the clipboard be the same as my regular clipboard
+" set clipboard+=unnamedplus
+
+set inccommand=split
+set list
+
+syntax enable
+
+set noswapfile
+
+" Help remap
+nnoremap <F1> <esc>
+inoremap <F1> <esc>
+vnoremap <F1> <esc>
+
+" 0 should be ^
+nnoremap 0 ^
+
+" Move lines
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" Disable the search highlig.
+nnoremap <esc> :noh<return><esc>
+
+" NERD Tree
+map <Leader>a :NERDTreeToggle<CR>
+
+" Fuzzy related
+map <Leader>o :GFiles<CR>
+map <Leader>O :tabnew<CR>:GFiles<CR>
+map <Leader>p :Files<CR>
+map <Leader>rg :Rg<SPACE>
+
+" Splits config
+
+" Remap changing split to Alt+hjkl
+noremap <A-l> <C-w>l
+noremap <A-h> <C-w>h
+noremap <A-j> <C-w>j
+noremap <A-k> <C-w>k
+
+" Remap changing tab to Ctrl+n(ext)/p(revious)
+noremap <C-n> gt
+noremap <C-p> gT
+
+" Vimtex
+let g:tex_flavor = 'latex'
+let g:vimtex_mappings_enabled = 0
+
+let g:vimtex_latexmk_continuous = 1
+
+" LaTeX bindings
+nnoremap <Leader>vc :VimtexCompile<CR>
+nnoremap <Leader>vi :VimtexTocToggle<CR>
+nnoremap <Leader>vp :VimtexView<CR> 
+
+" Markdown preview related
+let g:mkdp_auto_start = 0
+let g:mkdp_auto_close = 1
+let g:mkdp_refresh_slow = 0
+let g:mkdp_browser = 'brave'
+let g:mkdp_echo_preview_url = 1
+
+if empty(v:servername) && exists('*remote_startserver')
+    call remote_startserver('VIM')
+endif
+
+" Completion plugin config
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+inoremap <silent><expr> <c-p> completion#trigger_completion()
+
+set completeopt=menuone,noinsert,noselect " Set completeopt to have a better completion experience
+set shortmess+=c " Avoid showing message extra message when using completion
+
+" GUI options
+" set guifont=MesloLGLDZ_Nerd_Font_Mono:h15
+set guifont=Consolas:h16
 
 " Editing setup
-source $HOME/.config/nvim/lib/editing.vim
+source $HOME/.config/nvim/editing.vim
 
 " Syntax support
-source $HOME/.config/nvim/lib/syntax.vim
+source $HOME/.config/nvim/syntax.vim
 
-" ===========================================================================
-"   Personal programming setup
-" ===========================================================================
-" source $HOME/.config/nvim/lib/airline.vim
-source $HOME/.config/nvim/lib/lightline.vim
-" source $HOME/.config/nvim/lib/pomodoro.vim
-source $HOME/.config/nvim/lib/coc.vim
-
-" echodoc
-let g:echodoc_enable_at_startup = 1

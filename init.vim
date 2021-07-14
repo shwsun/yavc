@@ -119,15 +119,15 @@ call plug#end()
 "█▓▒░ Make pyenv and neovim work nice together
 
 if has('nvim')
-	set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
-	set inccommand=nosplit
-	noremap <C-q> :confirm qall<CR>
-	set guicursor=
-	autocmd OptionSet guicursor noautocmd set guicursor=
+    set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
+    set inccommand=nosplit
+    noremap <C-q> :confirm qall<CR>
+    set guicursor=
+    autocmd OptionSet guicursor noautocmd set guicursor=
 end
 
 if !has('gui_running')
-	set t_Co=256
+    set t_Co=256
 endif
 
 "█▓▒░ Plugin settings
@@ -197,8 +197,8 @@ set number                                  " Also show current absolute line
 set diffopt+=iwhite	                        " No whitespace in vimdiff
 " Make diffing better: https://vimways.org/2018/the-power-of-diff/
 if has("patch-8.1.0360")
-	set diffopt+=internal,algorithm:patience
-	set diffopt+=indent-heuristic
+    set diffopt+=internal,algorithm:patience
+    set diffopt+=indent-heuristic
 endif
 set colorcolumn=80                          " and give me a colored column
 set showcmd                                 " Show (partial) command in status line.
@@ -231,9 +231,9 @@ if g:use_nvim_lsp
     nnoremap <silent> <Leader>]     <cmd>lua vim.lsp.strutures.Diagnostics.buf_move_prev_diagnostic()<CR>
 
     augroup NvimLSP
-        autocmd!
-        autocmd BufWritePre *.py,*.rs,*.ex lua vim.lsp.buf.formatting_sync(nil, 2000)
-        autocmd BufEnter,BufWritePost *.rs lua require('lsp_extensions.inlay_hints').request { aligned = true, prefix = " » " }
+	autocmd!
+	autocmd BufWritePre *.py,*.rs,*.ex lua vim.lsp.buf.formatting_sync(nil, 2000)
+	autocmd BufEnter,BufWritePost *.rs lua require('lsp_extensions.inlay_hints').request { aligned = true, prefix = " » " }
     augroup END
 
     " Custom LSP diagnostics signs
@@ -401,11 +401,15 @@ map <Leader>rg :Rg<SPACE>
 
 " Splits config
 
-" Remap changing split to Alt+hjkl
+" Better window navigation
 noremap <A-l> <C-w>l
 noremap <A-h> <C-w>h
 noremap <A-j> <C-w>j
 noremap <A-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
 
 " Remap changing tab to Ctrl+n(ext)/p(revious)
 noremap <C-n> gt

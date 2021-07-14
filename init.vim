@@ -1,6 +1,5 @@
 " Plug related config
-
-call plug#begin()
+call plug#begin('$HOME/.local/share/nvim/plugged')
 
 Plug 'ciaranm/securemodelines'
 

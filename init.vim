@@ -31,11 +31,6 @@ Plug 'preservim/nerdtree'
 " Autopairs
 Plug 'jiangmiao/auto-pairs'
 
-" Coc
-" For the moment I will try to configure native Neovim LSP
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'josa42/coc-go', {'do': 'yarn install --frozen-lockfile', 'branch': 'master'}
-
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -68,9 +63,6 @@ Plug 'lervag/vimtex'
 " Plug 'xolox/vim-misc'
 " Plug 'xolox/vim-notes'
 
-" Debugging
-Plug 'puremourning/vimspector'
-
 " Neovim built in LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'tjdevries/lsp_extensions.nvim'
@@ -89,30 +81,9 @@ Plug 'ziglang/zig.vim'              " Zig language support
 Plug 'rhysd/vim-clang-format'
 
 " Language check
-Plug 'dpelle/vim-LanguageTool'
-
-" Because why not
-Plug 'ThePrimeagen/vim-apm'
 
 " Wiki :3
 Plug 'vimwiki/vimwiki'
-
-" SageMath
-Plug 'petRUShka/vim-sage'
-
-" Js
-Plug 'yuezk/vim-js'
-Plug 'maxmellon/vim-jsx-pretty'
-Plug 'eslint/eslint'
-
-" Python
-Plug 'fisadev/vim-isort'
-
-" Elixir
-Plug 'elixir-lang/vim-elixir'
-
-" Prisma
-Plug 'pantharshit00/vim-prisma'
 
 call plug#end()
 
@@ -134,7 +105,6 @@ endif
 
 " Don't confirm .lvimrc
 let g:localvimrc_ask = 0
-
 
 set noswapfile                              " Don't use swapfile
 
@@ -212,34 +182,32 @@ set listchars=nbsp:¬,extends:»,precedes:«,trail:•
 " LSP related
 lua require('init')
 
-let g:use_nvim_lsp = 1
 
-if g:use_nvim_lsp
-    setlocal omnifunc=v:lua.vim.lsp.omnifunc
+" native nvim lsp
+setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
-    nnoremap <silent> gd            <cmd>lua vim.lsp.buf.definition()<CR>
-    nnoremap <silent> gD            <cmd>lua vim.lsp.buf.implementation()<CR>
-    nnoremap <silent> gdd           <cmd>lua vim.lsp.buf.declaration()<CR>
-    nnoremap <silent> K             <cmd>lua vim.lsp.buf.hover()<CR>
-    nnoremap <silent> <c-k>         <cmd>lua vim.lsp.buf.signature_help()<CR>
-    nnoremap <silent> 1gD           <cmd>lua vim.lsp.buf.type_definition()<CR>
-    nnoremap <silent> gr            <cmd>lua vim.lsp.buf.references()<CR>
-    nnoremap <silent> gR            <cmd>lua vim.lsp.buf.rename()<CR>
-    nnoremap <silent> g0            <cmd>lua vim.lsp.buf.document_symbol()<CR>
-    nnoremap <silent> gW            <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-    nnoremap <silent> <Leader>[     <cmd>lua vim.lsp.strutures.Diagnostics.buf_move_next_diagnostic()<CR>
-    nnoremap <silent> <Leader>]     <cmd>lua vim.lsp.strutures.Diagnostics.buf_move_prev_diagnostic()<CR>
+nnoremap <silent> gd            <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gD            <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> gdd           <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> K             <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <c-k>         <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> 1gD           <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gr            <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gR            <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> g0            <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW            <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> <Leader>[     <cmd>lua vim.lsp.strutures.Diagnostics.buf_move_next_diagnostic()<CR>
+nnoremap <silent> <Leader>]     <cmd>lua vim.lsp.strutures.Diagnostics.buf_move_prev_diagnostic()<CR>
 
-    augroup NvimLSP
-	autocmd!
-	autocmd BufWritePre *.py,*.rs,*.ex lua vim.lsp.buf.formatting_sync(nil, 2000)
-	autocmd BufEnter,BufWritePost *.rs lua require('lsp_extensions.inlay_hints').request { aligned = true, prefix = " » " }
-    augroup END
+augroup NvimLSP
+    autocmd!
+    autocmd BufWritePre *.py,*.rs,*.ex lua vim.lsp.buf.formatting_sync(nil, 2000)
+    autocmd BufEnter,BufWritePost *.rs lua require('lsp_extensions.inlay_hints').request { aligned = true, prefix = " » " }
+augroup END
 
-    " Custom LSP diagnostics signs
-    " sign define LspDiagnosticsErrorSign text=E linehl=ErrorMsg texthl=LspDiagnosticsError numhl=
-    " sign define LspDiagnosticsWarningSign text=W linehl=MoreMsg texthl=LspDiagnosticsWarningSign numhl=
-end
+" Custom LSP diagnostics signs
+" sign define LspDiagnosticsErrorSign text=E linehl=ErrorMsg texthl=LspDiagnosticsError numhl=
+" sign define LspDiagnosticsWarningSign text=W linehl=MoreMsg texthl=LspDiagnosticsWarningSign numhl=
 
 " Golang related
 " Autoformat
@@ -269,8 +237,6 @@ let maplocalleader = ","
 
 set nocompatible
 syntax on
-
-set t_Co=256
 
 if (has("termguicolors"))
     set termguicolors
@@ -372,8 +338,6 @@ set inccommand=split
 set list
 
 syntax enable
-
-set noswapfile
 
 " Help remap
 nnoremap <F1> <esc>

@@ -255,6 +255,10 @@ let g:solarized_termcolors=256
 " colorscheme solarized
 
 " Airline theme
+let g:airline_detect_paste = 0      " I Don't need this. Never did.
+let g:airline_detect_crypt = 0      " Useless.
+let g:airline_detect_spell = 0      " Another useless thing.
+let g:airline_exclude_preview = 1
 let g:airline_theme = 'gruvbox'
 
 " Disable startup message

@@ -1,3 +1,8 @@
+" Fish doesn't play all that well with others
+set shell=/bin/bash
+let mapleader = "\<Space>"
+let maplocalleader = ","
+
 " Plug related config
 call plug#begin('$HOME/.local/share/nvim/plugged')
 
@@ -14,15 +19,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
-
-" Themes :3
-Plug 'morhetz/gruvbox'
-Plug 'patstockwell/vim-monokai-tasty'
-Plug 'srcery-colors/srcery-vim'
-Plug 'arcticicestudio/nord-vim'
-Plug 'altercation/vim-colors-solarized'
-Plug 'sonph/onehalf', { 'rtp': 'vim' }
-Plug 'NLKNguyen/papercolor-theme'
 
 " Tree/directory explorer
 Plug 'preservim/nerdtree' 
@@ -73,6 +69,7 @@ Plug 'euclidianAce/BetterLua.vim'   " Better lua
 Plug 'nvim-lua/completion-nvim'     " Better LSP completition
 
 Plug 'ziglang/zig.vim'              " Zig language support
+Plug 'tpope/vim-dispatch' 
 
 " C lang based formatting
 " By default it uses the Google style, if not .clang-format
@@ -83,6 +80,15 @@ Plug 'rhysd/vim-clang-format'
 
 " Wiki :3
 Plug 'vimwiki/vimwiki'
+
+" Themes :3
+Plug 'morhetz/gruvbox'
+Plug 'patstockwell/vim-monokai-tasty'
+Plug 'srcery-colors/srcery-vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()
 
@@ -229,10 +235,6 @@ autocmd FileType c,cpp,objc ClangFormatAutoEnable
 
 " General configuration
 " ---------------------
-
-" Map Leader to Space
-let mapleader = "\<Space>"
-let maplocalleader = ","
 
 set nocompatible
 syntax on
@@ -385,8 +387,7 @@ noremap <C-p> gT
 " Vimtex
 let g:tex_flavor = 'latex'
 let g:vimtex_mappings_enabled = 0
-
-let g:vimtex_latexmk_continuous = 1
+" let g:vimtex_latexmk_continuous = 1
 
 " LaTeX bindings
 nnoremap <Leader>vc :VimtexCompile<CR>

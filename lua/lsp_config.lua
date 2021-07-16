@@ -40,10 +40,10 @@ local sumneko_root_path
 local system_name
 
 if vim.fn.has("mac") == 1 then
-  sumneko_root_path = "/Users/taras/tmp/lua-language-server"
+  sumneko_root_path = "/Users/jethros/tmp/lua-language-server"
   system_name = "macOS"
 elseif vim.fn.has("unix") == 1 then
-  sumneko_root_path = "/home/taras/tmp/lua-language-server"
+  sumneko_root_path = "/home/jethros/tmp/lua-language-server"
   system_name = "Linux"
 elseif vim.fn.has('win32') == 1 then
   sumneko_root_path = "S:/Dev/misc/lua-language-server"

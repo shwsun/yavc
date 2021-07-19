@@ -90,6 +90,8 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'NLKNguyen/papercolor-theme'
 
+Plug 'junegunn/vim-easy-align'
+
 call plug#end()
 
 "█▓▒░ Make pyenv and neovim work nice together
